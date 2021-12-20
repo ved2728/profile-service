@@ -1,0 +1,39 @@
+
+server:
+  port: 8083
+
+opentracing:
+  spring:
+    cloud:
+      log:
+        enabled: true
+  jaeger:
+    enabled: true
+#    probabilistic-sampler:
+#      sampling-rate: 1.0
+    log-spans: true
+    udp-sender:
+      host: localhost
+      port: 6831
+    # demonstration purpose only
+    const-sampler:
+      decision: true
+    service-name: profile-service
+
+# logbook
+logbook:
+  format:
+    style: json
+  include:
+    - /profileInfo/**
+  exclude:
+    - /favicon.ico
+    - /actuator/**
+logging:
+  level:
+    ROOT: INFO
+    org:
+      springframework:
+        cloud: INFO
+      zalando:
+        logbook: TRACE
